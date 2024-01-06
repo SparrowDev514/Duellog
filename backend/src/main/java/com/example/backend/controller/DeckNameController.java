@@ -8,48 +8,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.backend.entity.Category;
-import com.example.backend.repository.CategoryRepository;
-
-import jakarta.transaction.Transactional;
-
+import com.example.backend.service.DeckNameService;
 
 @RestController
 @RequestMapping("/api")
 public class DeckNameController {
-
         @Autowired
-        CategoryRepository categoryRepository; 
+        DeckNameService DeckNameService;
 
-        @Transactional
         @PutMapping("/deck-name")
-	public String registerDeckName(@RequestBody Map<String,String> body)  {
-        long timeInMillis = System.currentTimeMillis();
-        Timestamp timestamp = new Timestamp(timeInMillis);
+        public String registerDeckName(@RequestBody Map<String, String> body) {
+                long timeInMillis = System.currentTimeMillis();
+                Timestamp timestamp = new Timestamp(timeInMillis);
 
-        //　メインカテゴリの登録
-        String main = (String) body.get("main");
-        Category mainCategory = new Category();
-        mainCategory.setCategory(main);        
-        mainCategory.setCreatedAt(timestamp);
-        categoryRepository.saveAndFlush(mainCategory);  
+                // メインカテゴリの登録
+                DeckNameService.registerDeckName(body.get("main"), timestamp);
 
-        //　サブカテゴリの登録
-        String sub1 = (String) body.get("sub1");
-        Category sub1Category = new Category();
-        sub1Category.setCategory(sub1);        
-        sub1Category.setCreatedAt(timestamp);
-        categoryRepository.saveAndFlush(sub1Category);  
+                // サブカテゴリ1の登録
+                DeckNameService.registerDeckName(body.get("sub1"), timestamp);
 
-        //　サブカテゴリ2の登録
-        String sub2 = (String) body.get("sub2");
-        Category sub2Category = new Category();
-        sub2Category.setCategory(sub2);        
-        sub2Category.setCreatedAt(timestamp);
-        categoryRepository.saveAndFlush(sub2Category);  
+                // サブカテゴリ2の登録
+                DeckNameService.registerDeckName(body.get("sub2"), timestamp);
 
-        return "OK";
-	};
+                return "OK";
+        };
 
 }
