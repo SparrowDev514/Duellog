@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.Category;
-import com.example.backend.repository.CategoryRepository;
+import com.example.backend.entity.DeckName;
+import com.example.backend.repository.DeckNameRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -14,13 +14,20 @@ import jakarta.transaction.Transactional;
 public class DeckNameService {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    DeckNameRepository deckNameRepository;
 
     @Transactional
-    public void registerDeckName(String categoryName, Timestamp timestamp) {
-        Category category = new Category();
-        category.setCategory(categoryName);
-        category.setCreatedAt(timestamp);
-        categoryRepository.saveAndFlush(category);
+    public void registerDeckName(String mainCategory, String sub1Category, String sub2Category, Timestamp timestamp) {
+        DeckName deckName = new DeckName();
+        System.out.println(mainCategory + sub1Category + sub2Category);
+        System.out.println(timestamp);
+
+        deckName.setDeckName(mainCategory + sub1Category + sub2Category);
+        deckName.setMainCategory(mainCategory);
+        deckName.setSub1Category(sub1Category);
+        deckName.setSub2Category(sub2Category);
+        deckName.setCreatedAt(timestamp);
+
+        deckNameRepository.saveAndFlush(deckName);
     }
 }
