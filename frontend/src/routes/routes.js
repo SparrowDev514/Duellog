@@ -29,6 +29,4 @@ const router = createRouter({
   routes,
 });
 
-const app = createApp(App);
-app.use(router);
 export default router;

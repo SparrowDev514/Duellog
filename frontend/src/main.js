@@ -1,16 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./routes/routes";
-import "./style.css";
-import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
+import vuetify from "./plugins/vuetify";
 import "@mdi/font/css/materialdesignicons.css";
-
-const vuetify = createVuetify({
-  components,
-  directives,
-});
+import "./style.css";
 
 const app = createApp(App);
 app.use(router);

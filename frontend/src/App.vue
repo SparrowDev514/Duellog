@@ -3,8 +3,8 @@
         <router-view></router-view>
     </main>
 </template>
-<style >
-#app {
-    width: 100%;
+<style>
+main {
+    padding-top: 10%;
 }
 </style>

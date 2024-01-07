@@ -21,7 +21,7 @@ public class DeckNameController {
         DeckNameService deckNameService;
 
         @PutMapping("/deck-name")
-        public String registerDeckName(@RequestBody Map<String, String> body) {
+        public void registerDeckName(@RequestBody Map<String, String> body) {
                 long timeInMillis = System.currentTimeMillis();
                 Timestamp timestamp = new Timestamp(timeInMillis);
 
@@ -29,15 +29,17 @@ public class DeckNameController {
                 categoryService.registerCategory(body.get("main"), timestamp);
 
                 // サブカテゴリ1の登録
-                categoryService.registerCategory(body.get("sub1"), timestamp);
+                if (body.get("sub1") != null) {
+                        categoryService.registerCategory(body.get("sub1"), timestamp);
+                }
 
                 // サブカテゴリ2の登録
-                categoryService.registerCategory(body.get("sub2"), timestamp);
+                if (body.get("sub2") != null) {
+                        categoryService.registerCategory(body.get("sub2"), timestamp);
+                }
 
                 // デッキ名の登録
                 deckNameService.registerDeckName(body.get("main"), body.get("sub1"), body.get("sub2"), timestamp);
-
-                return "OK";
-        };
+        }
 
 }

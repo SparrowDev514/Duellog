@@ -19,8 +19,6 @@ public class DeckNameService {
     @Transactional
     public void registerDeckName(String mainCategory, String sub1Category, String sub2Category, Timestamp timestamp) {
         DeckName deckName = new DeckName();
-        System.out.println(mainCategory + sub1Category + sub2Category);
-        System.out.println(timestamp);
 
         deckName.setDeckName(mainCategory + sub1Category + sub2Category);
         deckName.setMainCategory(mainCategory);

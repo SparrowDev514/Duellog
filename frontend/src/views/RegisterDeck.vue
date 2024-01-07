@@ -2,41 +2,74 @@
     <v-app>
         <Header page-name="デッキ登録"></Header>
         <v-main>
+            <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
+                <v-card>
+                    <ProgressLinear />
+                </v-card>
+            </v-dialog>
             <v-container>
                 <v-row>
-                    <v-col cols="12">
-                        <v-text-field label="メインカテゴリ" v-model="main"></v-text-field>
+                    <v-col col="12">
+                        <v-combobox clearable :rules="rules" :items="categories" v-model="main" label="メインカテゴリ" />
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="12">
-                        <v-text-field label="サブカテゴリ１" v-model="sub1"></v-text-field>
+                    <v-col col="12">
+                        <v-combobox clearable :items="categories" v-model="sub1" label="サブカテゴリ１" />
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="12">
-                        <v-text-field label="サブカテゴリ２" v-model="sub2"></v-text-field>
+                    <v-col col="12">
+                        <v-combobox clearable :items="categories" v-model="sub2" label="サブカテゴリ２" />
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col col="12">
+                        <v-btn :disabled="!main" @click="registerDeckName">登録</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
-            <v-btn @click="sendRequest">登録</v-btn>
         </v-main>
     </v-app>
 </template>
 <script setup>
+import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue';
+import ProgressLinear from '../components/ProgressLinear.vue';
 import axios from 'axios';
 
 const main = defineModel("main")
 const sub1 = defineModel("sub1")
 const sub2 = defineModel("sub2")
 
-const sendRequest = async () => {
-    const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-    }
+const categories = ref([])
+const isLoading = ref(false)
+const rules = [
+    value => {
+        if (value) return true
+        return 'メインカテゴリを入力してください'
+    },
+]
 
+onMounted(() => {
+    getCategories()
+})
+
+const getCategories = async () => {
+    isLoading.value = true
+    try {
+        const response = await axios.get('http://localhost:8080/api/categories');
+        categories.value = response.data
+    } catch (error) {
+        console.log(error);
+    } finally {
+        isLoading.value = false
+
+    }
+}
+
+const registerDeckName = async () => {
+    isLoading.value = true
     const body = {
         main: main.value,
         sub1: sub1.value,
@@ -45,9 +78,15 @@ const sendRequest = async () => {
 
     try {
         const response = await axios.put('http://localhost:8080/api/deck-name', body);
-        console.log(response);
+        console.log('put api/deck-name', response);
+
+        getCategories()
+
     } catch (error) {
         console.log(error);
+    } finally {
+        isLoading.value = false
     }
 }
 </script>
+<style></style>

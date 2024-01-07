@@ -1,7 +1,7 @@
 <template>
     <v-app-bar>
-        <template v-slot:prepend>
-            <v-btn icon to="/" v-if="route.path !== '/'">
+        <template v-slot:prepend v-if="route.path !== '/'">
+            <v-btn icon to="/">
                 <v-icon icon="mdi-arrow-left"></v-icon>
             </v-btn>
         </template>
