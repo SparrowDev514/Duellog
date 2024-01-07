@@ -1,6 +1,5 @@
 package com.example.backend.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +30,9 @@ public class CategoryService {
     }
 
     @Transactional
-    public void registerCategory(String categoryName, Timestamp timestamp) {
+    public void registerCategory(String categoryName) {
         Category category = new Category();
         category.setCategory(categoryName);
-        category.setCreatedAt(timestamp);
         categoryRepository.saveAndFlush(category);
     }
 }

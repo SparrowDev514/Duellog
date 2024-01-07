@@ -1,8 +1,8 @@
 <template>
     <v-app>
-        <Header pageName="戦績参照"></Header>
+        <Header pageName="設定"></Header>
         <router-link to="/">戻る</router-link>
-        <div>戦績参照ページです</div>
+        <div>設定ページです</div>
     </v-app>
 </template>
 <script setup>

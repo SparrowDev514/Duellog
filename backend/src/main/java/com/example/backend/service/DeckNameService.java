@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,29 @@ public class DeckNameService {
     DeckNameRepository deckNameRepository;
 
     @Transactional
-    public void registerDeckName(String mainCategory, String sub1Category, String sub2Category, Timestamp timestamp) {
+    public List<String> getDeckNames() {
+        List<DeckName> deckNames = deckNameRepository.findAll();
+        List<String> DeckNameList = new ArrayList<>();
+
+        for (DeckName deckName : deckNames) {
+            DeckNameList.add(deckName.getDeckName());
+        }
+
+        return DeckNameList;
+    }
+
+    @Transactional
+    public void registerDeckName(String mainCategory, String sub1Category, String sub2Category) {
         DeckName deckName = new DeckName();
 
-        deckName.setDeckName(mainCategory + sub1Category + sub2Category);
+        // sub1Category、sub2Categoryがnullの時は空文字とする
+        String sub1CategoryOrEnpty = (sub1Category != null) ? sub1Category : "";
+        String sub2CategoryOrEnpty = (sub2Category != null) ? sub2Category : "";
+
+        deckName.setDeckName(mainCategory + sub1CategoryOrEnpty + sub2CategoryOrEnpty);
         deckName.setMainCategory(mainCategory);
-        deckName.setSub1Category(sub1Category);
-        deckName.setSub2Category(sub2Category);
-        deckName.setCreatedAt(timestamp);
+        deckName.setSub1Category(sub1CategoryOrEnpty);
+        deckName.setSub2Category(sub2CategoryOrEnpty);
 
         deckNameRepository.saveAndFlush(deckName);
     }

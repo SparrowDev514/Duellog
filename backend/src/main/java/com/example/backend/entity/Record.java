@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -16,24 +18,27 @@ import lombok.Data;
 @Entity
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class DeckName {
+public class Record {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private long id;
+
+    @Column(length = 500, nullable = false)
+    private String myDeckName;
+
     @Column(length = 500)
-    private String deckName;
+    private String opponentDeckCategory;
 
-    @Column(length = 100, nullable = false)
-    private String mainCategory;
+    @Column(nullable = false)
+    private Boolean isFirst;
 
-    @Column(length = 100)
-    private String sub1Category;
-
-    @Column(length = 100)
-    private String sub2Category;
+    @Column(nullable = false)
+    private Boolean isWon;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
-
 }

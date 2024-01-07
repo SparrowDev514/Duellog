@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Header page-name="デッキ登録"></Header>
+        <Header pageName="デッキ登録"></Header>
         <v-main>
             <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
                 <v-card>
@@ -77,14 +77,14 @@ const registerDeckName = async () => {
     }
 
     try {
-        const response = await axios.put('http://localhost:8080/api/deck-name', body);
-        console.log('put api/deck-name', response);
-
+        await axios.put('http://localhost:8080/api/deck-name', body);
         getCategories()
-
     } catch (error) {
         console.log(error);
     } finally {
+        main.value = ""
+        sub1.value = ""
+        sub2.value = ""
         isLoading.value = false
     }
 }

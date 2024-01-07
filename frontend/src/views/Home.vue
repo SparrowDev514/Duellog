@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Header page-name="ホーム"></Header>
+        <Header pageName="ホーム"></Header>
         <v-main>
             <v-container>
                 <v-row>
@@ -16,6 +16,11 @@
                 <v-row>
                     <v-col col="12">
                         <v-btn block to="/readRecords">戦績参照 </v-btn>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col col="12">
+                        <v-btn block to="/settings">設定 </v-btn>
                     </v-col>
                 </v-row>
             </v-container>
