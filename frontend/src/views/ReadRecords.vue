@@ -10,16 +10,16 @@
             <v-container>
                 <v-row>
                     <v-col col="12">
-                        <v-btn block>Total</v-btn>
+                        <v-btn block to="/results">Total</v-btn>
                     </v-col>
                 </v-row>
-                <v-row v-for="deckName in deckNames">
+                <v-row v-for="deckName in  deckNames ">
                     <v-col col="12">
-                        <v-btn block>{{ deckName }}</v-btn>
+                        <v-btn block :to="'/results/' + `${deckName}`">{{ deckName }}</v-btn>
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col col="12">
+                    <v-col col=" 12">
                         <v-btn block>時間帯ごと</v-btn>
                     </v-col>
                 </v-row>

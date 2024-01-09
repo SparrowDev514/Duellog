@@ -20,9 +20,11 @@ public class RecordController {
 
     @PutMapping("/records")
     public void registerRecord(@RequestBody Record body) {
+        System.out.println(body.getOpponentDeckCategory());
 
         // 相手デッキカテゴリの登録
-        categoryService.registerCategory(body.getOpponentDeckCategory());
+        if (body.getOpponentDeckCategory() != null)
+            categoryService.registerCategory(body.getOpponentDeckCategory());
 
         // 戦績の登録
         recordService.registerRecord(body);

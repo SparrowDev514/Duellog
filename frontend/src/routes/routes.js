@@ -24,6 +24,16 @@ const routes = [
     component: () => import("../views/ReadRecords.vue"),
   },
   {
+    path: "/results",
+    name: "totalResults",
+    component: () => import("../views/Results.vue"),
+  },
+  {
+    path: "/results/:deckName",
+    name: "deckNameResults",
+    component: () => import("../views/Results.vue"),
+  },
+  {
     path: "/settings",
     name: "Settings",
     component: () => import("../views/Settings.vue"),
