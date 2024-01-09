@@ -1,10 +1,54 @@
 <template>
     <v-app>
         <Header pageName="戦績参照"></Header>
-        <router-link to="/">戻る</router-link>
-        <div>戦績参照ページです</div>
+        <v-main>
+            <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
+                <v-card>
+                    <ProgressLinear />
+                </v-card>
+            </v-dialog>
+            <v-container>
+                <v-row>
+                    <v-col col="12">
+                        <v-btn block>Total</v-btn>
+                    </v-col>
+                </v-row>
+                <v-row v-for="deckName in deckNames">
+                    <v-col col="12">
+                        <v-btn block>{{ deckName }}</v-btn>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col col="12">
+                        <v-btn block>時間帯ごと</v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-main>
     </v-app>
 </template>
 <script setup>
+import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue';
+import ProgressLinear from '../components/ProgressLinear.vue';
+import axios from 'axios';
+
+const deckNames = ref([])
+const isLoading = ref(false)
+
+onMounted(() => {
+    getDeckNames()
+})
+
+const getDeckNames = async () => {
+    isLoading.value = true
+    try {
+        const response = await axios.get('http://localhost:8080/api/deck-name');
+        deckNames.value = response.data
+    } catch (error) {
+        console.log(error);
+    } finally {
+        isLoading.value = false
+    }
+}
 </script>

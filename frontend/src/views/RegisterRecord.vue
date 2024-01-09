@@ -25,7 +25,7 @@
                 </v-row>
                 <v-row>
                     <v-col col="12">
-                        <v-select clearable :items="categories" v-model="opponentDeckCategory" label="相手のデッキを選択" />
+                        <v-combobox clearable :items="categories" v-model="opponentDeckCategory" label="相手のデッキを選択" />
                     </v-col>
                 </v-row>
                 <v-row>
@@ -81,7 +81,6 @@ const getDeckNames = async () => {
         console.log(error);
     } finally {
         isLoading.value = false
-
     }
 }
 

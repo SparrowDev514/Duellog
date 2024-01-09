@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.service.CategoryService;
 import com.example.backend.service.RecordService;
 import com.example.backend.entity.Record;
 
@@ -13,10 +14,15 @@ import com.example.backend.entity.Record;
 @RequestMapping("/api")
 public class RecordController {
     @Autowired
+    CategoryService categoryService;
+    @Autowired
     RecordService recordService;
 
     @PutMapping("/records")
     public void registerRecord(@RequestBody Record body) {
+
+        // 相手デッキカテゴリの登録
+        categoryService.registerCategory(body.getOpponentDeckCategory());
 
         // 戦績の登録
         recordService.registerRecord(body);
