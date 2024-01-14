@@ -20,7 +20,6 @@ public class RecordController {
 
     @PutMapping("/records")
     public void registerRecord(@RequestBody Record body) {
-        System.out.println(body.getOpponentDeckCategory());
 
         // 相手デッキカテゴリの登録
         if (body.getOpponentDeckCategory() != null)

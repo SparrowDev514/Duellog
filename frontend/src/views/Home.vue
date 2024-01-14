@@ -15,7 +15,7 @@
                 </v-row>
                 <v-row>
                     <v-col col="12">
-                        <v-btn block to="/readRecords">戦績参照 </v-btn>
+                        <v-btn block to="/SelectDeck">戦績参照 </v-btn>
                     </v-col>
                 </v-row>
                 <v-row>

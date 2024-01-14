@@ -8,5 +8,6 @@ public class Result {
     private double winRatio;
     private double firstRatio;
     private Long numOfButtle;
+    private String opponentDeck;
 
 }

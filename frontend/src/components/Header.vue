@@ -1,10 +1,6 @@
 <template>
     <v-app-bar>
-        <template v-slot:prepend v-if="route.path !== '/'">
-            <v-btn icon to="/">
-                <v-icon icon="mdi-arrow-left"></v-icon>
-            </v-btn>
-        </template>
+        <template v-slot:prepend v-if="route.path !== '/'" />
         <v-app-bar-title>{{ pageName }}</v-app-bar-title>
     </v-app-bar>
 </template>

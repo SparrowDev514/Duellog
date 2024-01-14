@@ -2,7 +2,7 @@
     <v-app>
         <Header pageName="戦績登録"></Header>
         <v-main>
-            <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
+            <v-dialog v-model=isLoading max-width="30%" max-height="30%">
                 <v-card>
                     <ProgressLinear />
                 </v-card>

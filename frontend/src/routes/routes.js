@@ -19,9 +19,9 @@ const routes = [
     component: () => import("../views/RegisterRecord.vue"),
   },
   {
-    path: "/readRecords",
-    name: "readRecords",
-    component: () => import("../views/ReadRecords.vue"),
+    path: "/SelectDeck",
+    name: "SelectDeck",
+    component: () => import("../views/SelectDeck.vue"),
   },
   {
     path: "/results",
@@ -32,6 +32,16 @@ const routes = [
     path: "/results/:deckName",
     name: "deckNameResults",
     component: () => import("../views/Results.vue"),
+  },
+  {
+    path: "/detail/results",
+    name: "totalResultsDetail",
+    component: () => import("../views/ResultsDetail.vue"),
+  },
+  {
+    path: "/detail/results/:deckName",
+    name: "resultsDetail",
+    component: () => import("../views/ResultsDetail.vue"),
   },
   {
     path: "/settings",

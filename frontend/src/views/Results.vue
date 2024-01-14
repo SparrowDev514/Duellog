@@ -2,7 +2,7 @@
     <v-app>
         <Header :pageName=pageName></Header>
         <v-main>
-            <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
+            <v-dialog v-model=isLoading max-width="30%" max-height="30%">
                 <v-card>
                     <ProgressLinear />
                 </v-card>
@@ -15,7 +15,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12">
-                        <v-progress-circular :size="350" :width="100" :model-value="results.winRatio * 100" color="#add8e6">
+                        <v-progress-circular :size="300" :width="80" :model-value="results.winRatio * 100" color="#add8e6">
                             <template v-slot:default>
                                 <p class="font-weight-black text-h4"> 勝率</p>
                             </template>
@@ -24,12 +24,17 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12">
-                        <v-progress-circular :size="350" :width="100" :model-value="results.firstRatio * 100"
+                        <v-progress-circular :size="300" :width="80" :model-value="results.firstRatio * 100"
                             color="#90ee90">
                             <template v-slot:default>
                                 <p class="font-weight-black text-h4">先手率 </p>
                             </template>
                         </v-progress-circular>
+                    </v-col>
+                </v-row>
+                <v-row v-if="results.numOfButtle !== 0">
+                    <v-col cols="12">
+                        <v-btn block :to="'/detail/results/' + `${deckNameInUrl}`">詳細 </v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -47,6 +52,7 @@ const route = useRoute()
 const isLoading = ref(false)
 const results = ref({})
 const pageName = ref(route.params.deckName ? route.params.deckName : "トータル")
+const deckNameInUrl = ref(route.params.deckName ? route.params.deckName : "")
 
 onMounted(() => {
     getRecord()
@@ -59,7 +65,6 @@ const getRecord = async () => {
         const response = await axios.get('http://localhost:8080/api/result', {
             params: { deckName: route.params.deckName ? route.params.deckName : null }
         });
-        console.log(response.data);
         results.value = response.data
     } catch (error) {
         console.error(error);

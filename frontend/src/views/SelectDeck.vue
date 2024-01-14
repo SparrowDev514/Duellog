@@ -1,8 +1,8 @@
 <template>
     <v-app>
-        <Header pageName="戦績参照"></Header>
+        <Header pageName="デッキ選択"></Header>
         <v-main>
-            <v-dialog v-model="isLoading" max-width="30%" max-height="30%">
+            <v-dialog v-model=isLoading max-width="30%" max-height="30%">
                 <v-card>
                     <ProgressLinear />
                 </v-card>
