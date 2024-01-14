@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { createApp } from "vue";
-import App from "../App.vue";
 
 const routes = [
   {

@@ -42,6 +42,8 @@ import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue';
 import ProgressLinear from '../components/ProgressLinear.vue';
 import axios from 'axios';
+import { BASE_URL } from '../consts/consts';
+
 
 const 先手後手 = [
     { hand: '先手', isFirst: true },
@@ -75,7 +77,7 @@ onMounted(() => {
 const getDeckNames = async () => {
     isLoading.value = true
     try {
-        const response = await axios.get('http://localhost:8080/api/deck-name');
+        const response = await axios.get(BASE_URL + 'deck-name');
         deckNames.value = response.data
     } catch (error) {
         console.log(error);
@@ -87,7 +89,7 @@ const getDeckNames = async () => {
 const getCategories = async () => {
     isLoading.value = true
     try {
-        const response = await axios.get('http://localhost:8080/api/categories');
+        const response = await axios.get(BASE_URL + 'categories');
         categories.value = response.data
     } catch (error) {
         console.log(error);
@@ -106,7 +108,7 @@ const sendRecord = async () => {
         isWon: isWon.value,
     }
     try {
-        await axios.put('http://localhost:8080/api/records', body);
+        await axios.put(BASE_URL + 'records', body);
     } catch (error) {
         console.log(error);
     } finally {

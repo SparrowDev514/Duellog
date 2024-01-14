@@ -47,6 +47,8 @@ import { useRoute } from 'vue-router'
 import Header from '../components/Header.vue';
 import ProgressLinear from '../components/ProgressLinear.vue';
 import axios from 'axios';
+import { BASE_URL } from '../consts/consts';
+
 
 const route = useRoute()
 const isLoading = ref(false)
@@ -62,7 +64,7 @@ const getRecord = async () => {
     isLoading.value = true
 
     try {
-        const response = await axios.get('http://localhost:8080/api/result', {
+        const response = await axios.get(BASE_URL + 'result', {
             params: { deckName: route.params.deckName ? route.params.deckName : null }
         });
         results.value = response.data

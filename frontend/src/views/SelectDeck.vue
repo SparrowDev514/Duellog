@@ -32,6 +32,8 @@ import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue';
 import ProgressLinear from '../components/ProgressLinear.vue';
 import axios from 'axios';
+import { BASE_URL } from '../consts/consts';
+
 
 const deckNames = ref([])
 const isLoading = ref(false)
@@ -43,7 +45,7 @@ onMounted(() => {
 const getDeckNames = async () => {
     isLoading.value = true
     try {
-        const response = await axios.get('http://localhost:8080/api/deck-name');
+        const response = await axios.get(BASE_URL + 'deck-name');
         deckNames.value = response.data
     } catch (error) {
         console.log(error);

@@ -37,6 +37,7 @@ import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue';
 import ProgressLinear from '../components/ProgressLinear.vue';
 import axios from 'axios';
+import { BASE_URL } from '../consts/consts';
 
 const main = defineModel("main")
 const sub1 = defineModel("sub1")
@@ -58,7 +59,7 @@ onMounted(() => {
 const getCategories = async () => {
     isLoading.value = true
     try {
-        const response = await axios.get('http://localhost:8080/api/categories');
+        const response = await axios.get(BASE_URL + 'categories');
         categories.value = response.data
     } catch (error) {
         console.log(error);
@@ -77,7 +78,7 @@ const registerDeckName = async () => {
     }
 
     try {
-        await axios.put('http://localhost:8080/api/deck-name', body);
+        await axios.put(BASE_URL + 'deck-name', body);
         getCategories()
     } catch (error) {
         console.log(error);
