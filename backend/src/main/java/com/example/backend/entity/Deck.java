@@ -16,11 +16,11 @@ import lombok.Data;
 @Entity
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class DeckName {
+public class Deck {
 
     @Id
     @Column(length = 500)
-    private String deckName;
+    private String DeckName;
 
     @Column(length = 100, nullable = false)
     private String mainCategory;

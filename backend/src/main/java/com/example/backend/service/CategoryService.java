@@ -23,7 +23,7 @@ public class CategoryService {
         List<String> categoryNames = new ArrayList<>();
 
         for (Category category : categories) {
-            categoryNames.add(category.getCategory());
+            categoryNames.add(category.getCategoryName());
         }
 
         return categoryNames;
@@ -31,8 +31,11 @@ public class CategoryService {
 
     @Transactional
     public void registerCategory(String categoryName) {
-        Category category = new Category();
-        category.setCategory(categoryName);
-        categoryRepository.saveAndFlush(category);
+        // categoryNameがない場合は処理を行わない
+        if (categoryName != null) {
+            Category category = new Category();
+            category.setCategoryName(categoryName);
+            categoryRepository.saveAndFlush(category);
+        }
     }
 }

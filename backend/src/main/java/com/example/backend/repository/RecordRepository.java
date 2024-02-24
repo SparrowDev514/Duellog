@@ -11,32 +11,32 @@ import com.example.backend.entity.Record;
 
 @Repository
 public interface RecordRepository extends JpaRepository<Record, Long> {
-    Long countByMyDeckName(String myDeckName);
+    Long countByMyDeck(String myDeck);
 
     Long countByIsWon(Boolean isWon);
 
     Long countByIsFirst(Boolean isFirst);
 
-    Long countByMyDeckNameAndIsWon(String myDeckName, Boolean isWon);
+    Long countByMyDeckAndIsWon(String myDeck, Boolean isWon);
 
-    Long countByMyDeckNameAndIsFirst(String myDeckName, Boolean isFirst);
+    Long countByMyDeckAndIsFirst(String myDeck, Boolean isFirst);
 
-    @Query("SELECT DISTINCT r.opponentDeckCategory FROM Record r ")
+    @Query("SELECT DISTINCT r.opponentDeckCategory FROM Record r")
     List<String> getOpponentDecks();
 
-    @Query("SELECT DISTINCT r.opponentDeckCategory FROM Record r WHERE r.myDeckName = :deckName")
-    List<String> getOpponentDecksByMyDeckName(@Param("deckName") String deckName);
+    @Query("SELECT DISTINCT r.opponentDeckCategory FROM Record r WHERE r.myDeck = :Deck")
+    List<String> getOpponentDecksByMyDeck(@Param("Deck") String Deck);
 
-    Long countByMyDeckNameAndOpponentDeckCategory(String myDeckName, String opponentDeckCategory);
+    Long countByMyDeckAndOpponentDeckCategory(String myDeck, String opponentDeckCategory);
 
     Long countByOpponentDeckCategory(String opponentDeckCategory);
 
     Long countByOpponentDeckCategoryAndIsWon(String opponentDeckCategory, Boolean ture);
 
-    Long countByMyDeckNameAndOpponentDeckCategoryAndIsWon(String myDeckName, String opponentDeckCategory, Boolean ture);
+    Long countByMyDeckAndOpponentDeckCategoryAndIsWon(String myDeck, String opponentDeckCategory, Boolean ture);
 
     Long countByOpponentDeckCategoryAndIsFirst(String opponentDeckCategory, Boolean ture);
 
-    Long countByMyDeckNameAndOpponentDeckCategoryAndIsFirst(String myDeckName, String opponentDeckCategory,
+    Long countByMyDeckAndOpponentDeckCategoryAndIsFirst(String myDeck, String opponentDeckCategory,
             Boolean ture);
 }

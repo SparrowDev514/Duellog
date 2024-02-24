@@ -20,13 +20,14 @@ public class ResultController {
 
     @GetMapping("/result")
     public Result getResult(@RequestParam(name = "deckName", defaultValue = "") String deckName) {
+        System.out.println(deckName);
         Result result = resultService.getResult(deckName);
         return result;
     }
 
     @GetMapping("/result/detail")
-    public List<Result> getResultDetail(@RequestParam(name = "deckName", defaultValue = "") String deckName) {
-        List<Result> result = resultService.getResultDetail(deckName);
+    public List<Result> getResultDetail(@RequestParam(name = "deckName", defaultValue = "") String deck) {
+        List<Result> result = resultService.getResultDetail(deck);
         return result;
     }
 

@@ -102,7 +102,7 @@ const getCategories = async () => {
 const sendRecord = async () => {
     isLoading.value = true
     const body = {
-        myDeckName: myDeckName.value,
+        myDeck: myDeckName.value,
         opponentDeckCategory: opponentDeckCategory.value,
         isFirst: isFirst.value,
         isWon: isWon.value,

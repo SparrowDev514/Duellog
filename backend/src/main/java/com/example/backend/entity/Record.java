@@ -22,11 +22,11 @@ public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     private long id;
 
     @Column(length = 500, nullable = false)
-    private String myDeckName;
+    private String myDeck;
 
     @Column(length = 500)
     private String opponentDeckCategory;

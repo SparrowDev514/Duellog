@@ -19,7 +19,7 @@ public class ResultService {
     @Transactional
     public Result getResult(String deckName) {
         Result result = new Result();
-        Long numOfButtle = deckName.isEmpty() ? recordRepository.count() : recordRepository.countByMyDeckName(deckName);
+        Long numOfButtle = deckName.isEmpty() ? recordRepository.count() : recordRepository.countByMyDeck(deckName);
 
         // 分母がゼロの時は早めに抜ける
         if (numOfButtle == 0) {
@@ -28,9 +28,9 @@ public class ResultService {
         }
 
         Long numOfwin = deckName.isEmpty() ? recordRepository.countByIsWon(true)
-                : recordRepository.countByMyDeckNameAndIsWon(deckName, true);
+                : recordRepository.countByMyDeckAndIsWon(deckName, true);
         Long numOfFirst = deckName.isEmpty() ? recordRepository.countByIsFirst(true)
-                : recordRepository.countByMyDeckNameAndIsFirst(deckName, true);
+                : recordRepository.countByMyDeckAndIsFirst(deckName, true);
 
         // 各種値をset
         result.setNumOfButtle(numOfButtle);
@@ -44,14 +44,14 @@ public class ResultService {
     public List<Result> getResultDetail(String deckName) {
         // 対戦したデッキをリストで取得
         List<String> opponentDecks = deckName.isEmpty() ? recordRepository.getOpponentDecks()
-                : recordRepository.getOpponentDecksByMyDeckName(deckName);
+                : recordRepository.getOpponentDecksByMyDeck(deckName);
         List<Result> Results = new ArrayList<>();
 
         // 対戦したデッキをもとに戦績を取得
         for (String opponentDeck : opponentDecks) {
             Result result = new Result();
             Long numOfButtle = deckName.isEmpty() ? recordRepository.countByOpponentDeckCategory(opponentDeck)
-                    : recordRepository.countByMyDeckNameAndOpponentDeckCategory(deckName, opponentDeck);
+                    : recordRepository.countByMyDeckAndOpponentDeckCategory(deckName, opponentDeck);
 
             // 分母がゼロの時は早めに抜ける
             if (numOfButtle == 0) {
@@ -60,11 +60,11 @@ public class ResultService {
 
             Long numOfwin = deckName.isEmpty()
                     ? recordRepository.countByOpponentDeckCategoryAndIsWon(opponentDeck, true)
-                    : recordRepository.countByMyDeckNameAndOpponentDeckCategoryAndIsWon(deckName, opponentDeck,
+                    : recordRepository.countByMyDeckAndOpponentDeckCategoryAndIsWon(deckName, opponentDeck,
                             true);
             Long numOfFirst = deckName.isEmpty()
                     ? recordRepository.countByOpponentDeckCategoryAndIsFirst(opponentDeck, true)
-                    : recordRepository.countByMyDeckNameAndOpponentDeckCategoryAndIsFirst(deckName,
+                    : recordRepository.countByMyDeckAndOpponentDeckCategoryAndIsFirst(deckName,
                             opponentDeck, true);
 
             // 各種値をset

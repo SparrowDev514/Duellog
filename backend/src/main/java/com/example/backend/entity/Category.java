@@ -20,7 +20,7 @@ public class Category {
 
     @Id
     @Column(length = 10)
-    private String category;
+    private String categoryName;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
