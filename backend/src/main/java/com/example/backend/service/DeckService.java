@@ -30,7 +30,7 @@ public class DeckService {
     }
 
     @Transactional
-    public void registerDeck(String mainCategory, String sub1Category, String sub2Category) {
+    public Deck registerDeck(String mainCategory, String sub1Category, String sub2Category) {
         Deck Deck = new Deck();
 
         // sub1Category、sub2Categoryがnullの時は空文字とする
@@ -42,6 +42,8 @@ public class DeckService {
         Deck.setSub1Category(sub1CategoryOrEmpty);
         Deck.setSub2Category(sub2CategoryOrEmpty);
 
-        DeckRepository.saveAndFlush(Deck);
+        Deck savedDeck = DeckRepository.saveAndFlush(Deck);
+
+        return savedDeck;
     }
 }

@@ -30,12 +30,15 @@ public class CategoryService {
     }
 
     @Transactional
-    public void registerCategory(String categoryName) {
+    public Category registerCategory(String categoryName) {
         // categoryNameがない場合は処理を行わない
-        if (categoryName != null) {
-            Category category = new Category();
-            category.setCategoryName(categoryName);
-            categoryRepository.saveAndFlush(category);
-        }
+        if (categoryName == null)
+            return new Category();
+
+        Category category = new Category();
+        category.setCategoryName(categoryName);
+        Category savedCategory = categoryRepository.saveAndFlush(category);
+        return savedCategory;
+
     }
 }
