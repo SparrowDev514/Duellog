@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.example.backend.entity.Category;
 import com.example.backend.entity.Deck;
 import com.example.backend.repository.DeckRepository;
 
